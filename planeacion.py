@@ -1,7 +1,7 @@
 from DatosInstancia import Actividad, DatosSubtema, Instancia_Pl_Ed
 
-# Dada una instancia y un número de actividad retorna un plan
-# que resuelve sus dependencias en orden (wrapper de GetDependencias)
+# (wrapper de GetDependencias)
+# Dada una instancia y un número de actividad retorna un plan que resuelve sus dependencias en orden 
 # además actualiza un conjunto que guarde las dependencias resueltas
 def ResolverDependencias(instancia: Instancia_Pl_Ed, num_activ: int, deps_resueltas: set[int]) -> list[int]:
     lista_plan = []
