@@ -10,14 +10,14 @@ actividades de precedencia tiene solo el 30% de las actividades con precedencias
 Las columnas significan lo siguiente:
 1.- Materia             (Toma el valor de 1 o 2, solo hay dos materias)
 2.- Tema                (Toma el valor de 1,2,3 o 4, solo existen 4 temas)
-3.- Subtema             (Toma el valor entre 1-8, solo existen 8 subtemas
+3.- Subtema             (Toma el valor entre 1-8, solo existen 8 subtemas)
 4.- Número de Actividad (Toma el valor entre 1-88, solo existen 88 actividades)
 5.- Duración            (Toma valores entre 3-15)
 6.- Valor               (Toma valores entre 9-15)
 7.- Estrés              (Toma valores entre XX, esta columna no la utilizamos para este modelo)
-8.- Obligatoria         (Toma el valor de 1 si la actividad es obligatoria)
-9.- Requerimiento 1     (Toma el valor del num de la actividad que la precede, cero en otro caso)
-10.-Requerimiento 2     (Toma el valor del num de la actividad que la precede, cero en otro caso)
+8.- Requerimiento 1     (Toma el valor del num de la actividad que la precede, cero en otro caso)
+9.- Requerimiento 2     (Toma el valor del num de la actividad que la precede, cero en otro caso)
+10.- Obligatoria        (Toma el valor de 1 si la actividad es obligatoria)
 
 ----------------------------------------------------------------------------
 
@@ -28,7 +28,7 @@ representa a un estudiante y puede presentar niveles bajos, medios o altos de es
 Los perfiles de estrés son los siguientes:
 
 1.- Alto				(valores entre .35  - .5)
-2.- Medio				(valores entre .16  - .34
+2.- Medio				(valores entre .16  - .34)
 3.- Bajo				(valores entre .001 - .15)
 4.- Medio - Alto			(La mitad valores medios, el resto valores altos)
 5.- Medio - Bajo			(La mitad valores medios, el resto valores bajos)

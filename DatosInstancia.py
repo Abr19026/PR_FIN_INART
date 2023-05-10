@@ -13,26 +13,36 @@ class Actividad:
     def __str__(self) -> str:
         return f"subtema: {self.subtema}, tiempo: {self.tiempo}, valor: {self.valor}, oblig: {self.obligatoria}, reqs: {self.requerimientos}"
 
+# Guarda los numeros de las actividades de cada subtema
+# y la calificación mímima restante
+class DatosSubtema:
+    __slots__ = ("nums_actividades", "valor_min")
+    
+    def __init__(self, valor_min=0) -> None:
+        self.nums_actividades: set[int] = set()
+        self.valor_min: float = valor_min
+
 # Guarda todas las actividades en .actividades
-# Guarda los numeros de las actividades que pertenecen a cada subtema en .subtemas
+# Guarda los datos de cada subtema en .subtemas
 class Instancia_Pl_Ed:
     __slots__ = ("actividades", "subtemas")
     
     def __init__(self) -> None:
-        self.subtemas: dict[int, set[int]] = defaultdict(set)
-        self.actividades: dict[int,Actividad] = {}
+        self.actividades: dict[int, Actividad] = {}
+        self.subtemas: dict[int, DatosSubtema] = defaultdict(DatosSubtema)
     
     def __str__(self) -> str:
         retorno = ""
         for subtema in sorted(self.subtemas):
-            for num_actividad in sorted(self.subtemas[subtema]):
+            for num_actividad in sorted(self.subtemas[subtema].nums_actividades):
                 retorno += f"{num_actividad}: {self.actividades[num_actividad]}\n"
         return retorno
     
 carpeta_instancias = "instancias"
 
-#Crea una instancia del problema dado el nombre de un archivo
-def get_problema(nombre_archivo: str) -> Instancia_Pl_Ed:
+# Crea una instancia del problema dado el nombre de un archivo
+# y una calificación mínima kmin para todos los subtemas
+def get_problema(nombre_archivo: str, kmin) -> Instancia_Pl_Ed:
     with open(f"{carpeta_instancias}/{nombre_archivo}") as archivo:
         instancia = Instancia_Pl_Ed()
         for linea in archivo.readlines():
@@ -50,10 +60,9 @@ def get_problema(nombre_archivo: str) -> Instancia_Pl_Ed:
             nueva_act = Actividad(subtema , tiempo, valor, obligatorio, reqs)
 
             instancia.actividades[num_act] = nueva_act
-            instancia.subtemas[subtema].add(num_act)
+            instancia.subtemas[subtema].nums_actividades.add(num_act)
+            instancia.subtemas[subtema].valor_min = kmin
         return instancia
     
-if __name__ == "__main__":
-    inst = get_problema("f_5_2.csv")
-    print(inst)
+
 
