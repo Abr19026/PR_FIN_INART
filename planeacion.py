@@ -54,7 +54,9 @@ class ListaCombsSols:
         
         for subtem in inst.subtemas:
             calif_min = inst.subtemas[subtem].calif_min
-            self.combs_sols[subtem] = [func(inst, subtem, calif_min) for func in self.funcs_sols].sort(key=lambda x: x.tiempo)
+            lista_sols = [func(inst, subtem, calif_min) for func in self.funcs_sols]
+            lista_sols.sort(key=lambda x: x.tiempo)
+            self.combs_sols[subtem] = lista_sols
 
 def get_producto_sols_posibles(Lista_sols: ListaCombsSols):
     for producto in product(*[Lista_sols.combs_sols[x] for x in Lista_sols.combs_sols]):
@@ -127,4 +129,6 @@ def CrearPlan(inst: Instancia_Pl_Ed) -> list:
     for resto_plan, tiempo in get_producto_sols_posibles(posibles_sols):
         if tiempo < mejor_tiempo:
             mejor_resto_plan = resto_plan
-    return (plan.append(mejor_resto_plan), tiempo + mejor_tiempo)
+            mejor_tiempo = tiempo
+    plan.append(mejor_resto_plan)
+    return (plan, tiempo + mejor_tiempo)
