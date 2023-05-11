@@ -96,7 +96,7 @@ def GetDependencias(instancia: Instancia_Pl_Ed, pila_camino: list[int], Plan: li
             Plan.append(actividad_agregar)
     return
 
-def CrearPlan(inst: Instancia_Pl_Ed) -> list:
+def CrearPlan(inst: Instancia_Pl_Ed) -> tuple[list, float]:
     tiempo = 0
     plan: list[list[Actividad] | set[Actividad]] = [] # Plan a retornar
     escogidos: set[int] = set() # Guarda los índices de las actividades ya escogidas
@@ -126,9 +126,10 @@ def CrearPlan(inst: Instancia_Pl_Ed) -> list:
     posibles_sols = ListaCombsSols(inst)
     mejor_tiempo = float("inf")
     mejor_resto_plan = []
-    for resto_plan, tiempo in get_producto_sols_posibles(posibles_sols):
-        if tiempo < mejor_tiempo:
+    for resto_plan, tiempo_resto in get_producto_sols_posibles(posibles_sols):
+        if tiempo_resto < mejor_tiempo:
             mejor_resto_plan = resto_plan
-            mejor_tiempo = tiempo
+            mejor_tiempo = tiempo_resto
     plan.append(mejor_resto_plan)
-    return (plan, tiempo + mejor_tiempo)
+    tiempo += mejor_tiempo
+    return (plan, tiempo)
