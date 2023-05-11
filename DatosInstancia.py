@@ -30,7 +30,7 @@ class DatosSubtema:
 # Guarda los datos de cada subtema en .subtemas, dado su numero de subtema me da sus datos
 # Guarda la calificación mínima por subtema en kmin (solo es necesaria para la creación)
 class Instancia_Pl_Ed:
-    __slots__ = ("actividades", "subtemas", "kmin")
+    __slots__ = ("actividades", "subtemas", "combs_soluciones","kmin")
     
     def __init__(self, kmin: float) -> None:
         self.kmin = kmin
@@ -57,7 +57,13 @@ class Instancia_Pl_Ed:
             if act_requerida not in self.actividades:
                 self.actividades[act_requerida] = Actividad(act_requerida)
             self.actividades[act_requerida].requerido_por.add(num)
-                
+
+    def get_subtema(self, num_actividad: Actividad) -> DatosSubtema:
+        return self.subtemas[self.actividades[num_actividad].subtema]
+
+    def get_actividades(self, num_subtema: int):
+        return self.subtemas[num_subtema].nums_actividades
+
     def __str__(self) -> str:
         retorno = ""
         for subtema in sorted(self.subtemas.keys()):
