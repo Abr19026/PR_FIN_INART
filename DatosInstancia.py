@@ -95,6 +95,6 @@ if __name__ == "__main__":
     # E J E M P L O   D E   C R E A C I Ó N   D E   I N S T A N C I A
     # Primero paso el nombre del archivo y la calificación mínima por subtema
     # La función me crea la instancia de tipo Instancia_Pl_Ed
-    inst = get_problema("instancias/f_5_2.csv", 70)
+    inst = get_problema("instancias/f_3_2.csv", 70)
     # podemos ver la instancia así:
     print(inst)
